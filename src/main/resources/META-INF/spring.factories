@@ -1,0 +1,1 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=cn.ljserver.tool.weboffice.v3.config.AutoConfig
