@@ -5,6 +5,15 @@
 - JDK 8+
 - Spring Framework 4.0+
 
+## 使用说明
+~~~xml
+<dependency>
+  <groupId>cn.ljserver.tool</groupId>
+  <artifactId>web-office-v3</artifactId>
+  <version>1.0.0-RELEASE</version>
+</dependency>
+~~~
+
 ## 主要结构及说明
 
 ~~~
