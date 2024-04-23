@@ -15,11 +15,21 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 
+
+/**
+ * 文档编辑 -> 详见： <br>
+ * <a href="https://solution.wps.cn/docs/callback/save.html">wps web office 文档编辑</a>
+ */
 @RestController
-@ResponseBody
 @RequestMapping("/v3/3rd/files")
 public class FileStorageController extends ProviderBaseController {
 
+    /**
+     * 三阶段保存 - 准备上传阶段
+     *
+     * @param fileId 文件id <br>
+     *               <a href = "https://solution.wps.cn/docs/callback/save.html#准备上传阶段">-详见官方文档-</a>
+     */
     @GetMapping("/{file_id}/upload/prepare")
     @ProviderJsonApi
     public ProviderResponseEntity<Map<String, Object>> uploadPrepare(@PathVariable("file_id") String fileId) {
@@ -27,6 +37,13 @@ public class FileStorageController extends ProviderBaseController {
                 .singletonMap("digest_types", this.getMultiPhaseServiceOrThrow().uploadPrepare(fileId)));
     }
 
+    /**
+     * 三阶段保存 - 获取上传地址
+     *
+     * @param fileId  文件id
+     * @param request 上传的文件 <br>
+     *                <a href = "https://solution.wps.cn/docs/callback/save.html#获取上传地址">-详见官方文档-</a>
+     */
     @PostMapping("/{file_id}/upload/address")
     public ProviderResponseEntity<FileUploadMultiPhase.FileUploadAddress.Response> uploadAddress(@PathVariable("file_id") String fileId,
                                                                                                  @RequestBody FileUploadMultiPhase.FileUploadAddress.Request request) {
@@ -34,6 +51,13 @@ public class FileStorageController extends ProviderBaseController {
         return ProviderResponseEntity.ok(this.getMultiPhaseServiceOrThrow().uploadAddress(request));
     }
 
+    /**
+     * 三阶段保存 - 上传完成后，回调通知上传结果
+     *
+     * @param fileId  文件id
+     * @param request 上传的文件 <br>
+     *                <a href = "https://solution.wps.cn/docs/callback/save.html#上传完成后，回调通知上传结果">-详见官方文档-</a>
+     */
     @PostMapping("/{file_id}/upload/complete")
     @ProviderJsonApi
     public ProviderResponseEntity<FileInfo> uploadComplete(@PathVariable("file_id") String fileId,
@@ -42,7 +66,13 @@ public class FileStorageController extends ProviderBaseController {
         return ProviderResponseEntity.ok(this.getMultiPhaseServiceOrThrow().uploadComplete(request));
     }
 
-
+    /**
+     * 单阶段保存 - 上传文件
+     *
+     * @param fileId  文件id
+     * @param request 上传的文件 <br>
+     *                <a href = "https://solution.wps.cn/docs/callback/save.html#单阶段提交">-详见官方文档-</a>
+     */
     @PostMapping(value = "/{file_id}/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ProviderJsonApi
     public ProviderResponseEntity<FileInfo> uploadFile(@PathVariable("file_id") String fileId,

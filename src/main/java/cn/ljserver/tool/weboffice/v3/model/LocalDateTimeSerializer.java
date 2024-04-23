@@ -10,6 +10,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 
+/**
+ * @ClassName: LocalDateTimeSerializer
+ * @Description: 时间序列化
+ */
 class LocalDateTimeSerializer extends StdSerializer<LocalDateTime> {
     private static final ZoneOffset OFFSET = ZoneId.systemDefault().getRules().getOffset(Instant.EPOCH);
 

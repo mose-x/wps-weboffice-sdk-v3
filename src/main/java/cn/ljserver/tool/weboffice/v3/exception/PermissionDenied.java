@@ -4,6 +4,9 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * 用户操作权限不足
+ */
 @Getter
 @ResponseStatus(HttpStatus.FORBIDDEN)
 public class PermissionDenied extends ProviderException {

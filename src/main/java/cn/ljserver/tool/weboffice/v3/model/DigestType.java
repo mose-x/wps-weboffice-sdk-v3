@@ -2,6 +2,9 @@ package cn.ljserver.tool.weboffice.v3.model;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
+/**
+ * 签名算法类型
+ */
 public enum DigestType {
     NONE(""),
     MD5("md5"),

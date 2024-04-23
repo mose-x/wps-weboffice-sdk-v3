@@ -7,6 +7,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 程序响应实体
+ *
+ * @param <T>
+ */
 @Data
 @Builder
 @NoArgsConstructor

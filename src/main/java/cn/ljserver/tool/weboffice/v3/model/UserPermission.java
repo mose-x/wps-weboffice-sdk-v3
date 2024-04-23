@@ -9,6 +9,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+/**
+ * 文件权限
+ */
 @Data
 @Builder
 @NoArgsConstructor

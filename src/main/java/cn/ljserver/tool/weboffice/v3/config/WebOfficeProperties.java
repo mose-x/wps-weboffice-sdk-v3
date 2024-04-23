@@ -7,35 +7,69 @@ import org.springframework.context.annotation.Configuration;
  * 开放平台配置对象
  */
 @Configuration
-@ConfigurationProperties("web-office-v3")
+@ConfigurationProperties("web-office")
 public class WebOfficeProperties {
 
-    private String appid;
-    private String secret;
-    private String domain;
+    /**
+     * 转换配置
+     */
+    private ConvertConfig convert;
 
-    public String getAppid() {
-        return appid;
+    /**
+     * 预览配置
+     */
+    private Config preview;
+
+    public Config getPreview() {
+        return preview;
     }
 
-    public void setAppid(String appid) {
-        this.appid = appid;
+    public void setPreview(Config preview) {
+        this.preview = preview;
     }
 
-    public String getSecret() {
-        return secret;
+    public ConvertConfig getConvert() {
+        return convert;
     }
 
-    public void setSecret(String secret) {
-        this.secret = secret;
+    public void setConvert(ConvertConfig convert) {
+        this.convert = convert;
     }
 
-    public String getDomain() {
-        return domain;
+
+    public static class Config {
+
+        private String appid;
+        private String secret;
+
+        public String getAppid() {
+            return appid;
+        }
+
+        public void setAppid(String appid) {
+            this.appid = appid;
+        }
+
+        public String getSecret() {
+            return secret;
+        }
+
+        public void setSecret(String secret) {
+            this.secret = secret;
+        }
     }
 
-    public void setDomain(String domain) {
-        this.domain = domain;
+
+    public static class ConvertConfig extends Config {
+        private String domain;
+
+        public String getDomain() {
+            return domain;
+        }
+
+        public void setDomain(String domain) {
+            this.domain = domain;
+        }
     }
 
 }

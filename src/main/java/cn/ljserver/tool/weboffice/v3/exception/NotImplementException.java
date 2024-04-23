@@ -4,6 +4,9 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * 接口未实现异常
+ */
 @Getter
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class NotImplementException extends ProviderException {

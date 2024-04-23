@@ -8,6 +8,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 文件水印
+ */
 @Data
 @Builder
 @NoArgsConstructor

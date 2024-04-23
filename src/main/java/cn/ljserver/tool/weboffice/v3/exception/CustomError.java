@@ -4,9 +4,12 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * 自定义异常
+ */
 @Getter
 @ResponseStatus(HttpStatus.FORBIDDEN)
-public class CustomError extends ProviderException{
+public class CustomError extends ProviderException {
     private final int code = ErrorCodes.CustomError.getCode();
 
     public CustomError() {

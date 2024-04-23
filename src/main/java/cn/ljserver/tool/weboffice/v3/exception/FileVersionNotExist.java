@@ -4,6 +4,9 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * 文档版本不存在
+ */
 @Getter
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class FileVersionNotExist extends ProviderException {

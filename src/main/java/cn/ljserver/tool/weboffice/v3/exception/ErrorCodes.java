@@ -2,6 +2,11 @@ package cn.ljserver.tool.weboffice.v3.exception;
 
 import lombok.Getter;
 
+/**
+ * 错误码说明
+ * <p>
+ * <a href = "https://solution.wps.cn/docs/callback/error-code.html">-详见官方文档-</a>
+ */
 @Getter
 public enum ErrorCodes {
 

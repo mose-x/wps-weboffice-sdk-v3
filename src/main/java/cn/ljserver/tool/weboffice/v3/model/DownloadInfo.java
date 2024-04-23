@@ -10,6 +10,10 @@ import lombok.NonNull;
 
 import java.util.Map;
 
+/**
+ * @ClassName: DownloadInfo
+ * @Description: 下载信息
+ */
 @Data
 @Builder
 @NoArgsConstructor

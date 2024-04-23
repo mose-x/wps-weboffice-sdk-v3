@@ -15,11 +15,15 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * @ClassName ProviderBaseController
+ * @Description: 基础控制器，异常处理
+ */
 @Controller
 public class ProviderBaseController {
     @ExceptionHandler({ProviderException.class})
     public @ResponseBody ProviderResponseEntity<?> handleProviderExceptions(ProviderException exception,
-                                                                         HttpServletResponse response) {
+                                                                            HttpServletResponse response) {
         // let it broken
         ResponseStatus status = AnnotationUtils.findAnnotation(exception.getClass(), ResponseStatus.class);
         response.setStatus(status.value().value());
@@ -30,7 +34,7 @@ public class ProviderBaseController {
             HttpMediaTypeNotSupportedException.class,
             ServletRequestBindingException.class})
     public @ResponseBody ProviderResponseEntity<?> handleInvalidRequestExceptions(Exception ex,
-                                                                               HttpServletResponse response) {
+                                                                                  HttpServletResponse response) {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return ProviderResponseEntity.builder().code(40005).message(ex.getMessage()).build();
     }

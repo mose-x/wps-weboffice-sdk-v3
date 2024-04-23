@@ -3,6 +3,9 @@ package cn.ljserver.tool.weboffice.v3.model;
 import lombok.Builder;
 import lombok.Getter;
 
+/**
+ * 程序请求属性
+ */
 @Getter
 @Builder
 public class ProviderRequestAttribute {

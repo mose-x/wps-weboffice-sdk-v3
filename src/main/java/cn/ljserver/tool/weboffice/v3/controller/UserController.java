@@ -13,9 +13,20 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * 用户信息 -> 详见： <br>
+ * <a href="https://solution.wps.cn/docs/callback/user.html">wps web office 用户信息</a>
+ */
 @RestController
 @RequestMapping("/v3/3rd/users")
 public class UserController extends ProviderBaseController {
+
+    /**
+     * 批量获取用户信息
+     *
+     * @param userIds 用户id列表 <br>
+     *                <a href = "https://solution.wps.cn/docs/callback/user.html#批量获取用户信息">-详见官方文档-</a>
+     */
     @GetMapping
     @ProviderJsonApi
     public ProviderResponseEntity<List<UserInfo>> fetchUsers(@RequestParam("user_ids") List<String> userIds) {

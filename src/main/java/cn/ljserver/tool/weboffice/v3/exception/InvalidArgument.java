@@ -4,6 +4,9 @@ import lombok.Getter;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * 请求参数错误
+ */
 @Getter
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class InvalidArgument extends ProviderException {
