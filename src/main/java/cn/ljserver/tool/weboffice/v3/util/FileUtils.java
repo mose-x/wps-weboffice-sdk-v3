@@ -23,11 +23,12 @@ public class FileUtils {
     public static final String P = "p";
     // PDF
     public static final String F = "f";
-    // 多维表格
+    // 智能文档
     public static final String O = "o";
+    // 智能文档
+    public static final String D = "d";
 
-    public static final String[] arrTypes = {S, W, P, F, O};
-    public static final List<String> listTypes = Arrays.stream(arrTypes).collect(Collectors.toList());
+    public static final String[] convertArrTypes = {S, W, P, D, O};
 
     public static final Map<String, String> officeTypes;
 

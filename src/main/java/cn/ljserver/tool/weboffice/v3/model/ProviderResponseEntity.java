@@ -1,5 +1,6 @@
 package cn.ljserver.tool.weboffice.v3.model;
 
+import cn.ljserver.tool.weboffice.v3.exception.ErrorCodes;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -29,5 +30,10 @@ public class ProviderResponseEntity<T> {
 
     public static <T> ProviderResponseEntity<T> ok(T data) {
         return new ProviderResponseEntity<>(0, "ok", data);
+    }
+
+    public static <T> ProviderResponseEntity<T> err() {
+        return new ProviderResponseEntity<>(ErrorCodes.InternalError.getCode(),
+                ErrorCodes.InternalError.name(), null);
     }
 }

@@ -2,7 +2,6 @@ package cn.ljserver.tool.weboffice.v3.util;
 
 import cn.ljserver.tool.weboffice.v3.exception.InvalidArgument;
 import cn.ljserver.tool.weboffice.v3.exception.InvalidToken;
-import com.squareup.okhttp.Headers;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -38,20 +37,6 @@ public class HeaderUtils {
         return header;
     }
 
-    public static Headers headers(Map<String, String> headersMap) {
-        Headers headers ;
-        Headers.Builder headersbuilder = new Headers.Builder();
-        if (headersMap != null && !headersMap.isEmpty()) {
-            headersMap.forEach(headersbuilder::add);
-        }
-        headers = headersbuilder.build();
-        return headers;
-    }
-
-    public static Headers headers(String method, String uri, String body, String appid, String secret){
-        return headers(header(method,uri,body,appid,secret));
-    }
-
     /**
      * 获取请求头
      *
@@ -79,7 +64,7 @@ public class HeaderUtils {
      * @return DATE -> 请求的时间
      */
     public static String getHeaderDate(HttpServletRequest request) {
-        return request.getHeader("DATE");
+        return request.getHeader("Date");
     }
 
     /**

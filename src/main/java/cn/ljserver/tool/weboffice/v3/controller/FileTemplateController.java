@@ -1,5 +1,6 @@
 package cn.ljserver.tool.weboffice.v3.controller;
 
+import cn.ljserver.tool.weboffice.v3.model.FileTemplate;
 import cn.ljserver.tool.weboffice.v3.model.ProviderResponseEntity;
 import cn.ljserver.tool.weboffice.v3.service.FileTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
