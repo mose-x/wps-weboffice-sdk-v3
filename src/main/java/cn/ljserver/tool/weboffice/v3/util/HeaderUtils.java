@@ -2,6 +2,7 @@ package cn.ljserver.tool.weboffice.v3.util;
 
 import cn.ljserver.tool.weboffice.v3.exception.InvalidArgument;
 import cn.ljserver.tool.weboffice.v3.exception.InvalidToken;
+import com.squareup.okhttp.Headers;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
@@ -32,9 +33,23 @@ public class HeaderUtils {
         String data = DateUtils.date();
         header.put("Content-Md5", md5);
         header.put("Content-Type", "application/json");
-        header.put("DATE", data);
+        header.put("Date", data);
         header.put("Authorization", SignUtils.sign(appid, secret, data, md5));
         return header;
+    }
+
+    public static Headers headers(Map<String, String> headersMap) {
+        Headers headers ;
+        Headers.Builder headersbuilder = new Headers.Builder();
+        if (headersMap != null && !headersMap.isEmpty()) {
+            headersMap.forEach(headersbuilder::add);
+        }
+        headers = headersbuilder.build();
+        return headers;
+    }
+
+    public static Headers headers(String method, String uri, String body, String appid, String secret){
+        return headers(header(method,uri,body,appid,secret));
     }
 
     /**

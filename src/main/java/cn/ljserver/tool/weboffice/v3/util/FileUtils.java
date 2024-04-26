@@ -5,6 +5,7 @@ import lombok.SneakyThrows;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName: FileUtils
@@ -14,21 +15,40 @@ public class FileUtils {
     private FileUtils() {
     }
 
-    private static final Map<String, String> officeTypes;
+    // 表格
+    public static final String S = "s";
+    // 文档
+    public static final String W = "w";
+    // 演示
+    public static final String P = "p";
+    // PDF
+    public static final String F = "f";
+    // 多维表格
+    public static final String O = "o";
+
+    public static final String[] arrTypes = {S, W, P, F, O};
+    public static final List<String> listTypes = Arrays.stream(arrTypes).collect(Collectors.toList());
+
+    public static final Map<String, String> officeTypes;
 
     static {
         final Map<String, String> map = new HashMap<>(48);
 
+        // 表格
         Arrays.stream(new String[]{"et", "xls", "xlt", "xlsx", "xlsm", "xltx", "xltm", "csv", "ett"})
-                .forEach(s -> map.put(s, "s"));
+                .forEach(s -> map.put(s, S));
 
+        // 文档
         Arrays.stream(new String[]{"doc", "docx", "txt", "dot", "wps", "wpt", "dotx", "docm", "dotm", "xml", "rtf", "mht", "html"})
-                .forEach(s -> map.put(s, "w"));
+                .forEach(s -> map.put(s, W));
 
+        // 演示
         Arrays.stream(new String[]{"ppt", "pptx", "pptm", "pptm", "ppsm", "pps", "potx", "potm", "dpt", "dps", "pot", "ppsx"})
-                .forEach(s -> map.put(s, "p"));
+                .forEach(s -> map.put(s, P));
 
-        Arrays.stream(new String[]{"pdf"}).forEach(s -> map.put(s, "f"));
+        // PDF
+        Arrays.stream(new String[]{"pdf"})
+                .forEach(s -> map.put(s, F));
 
         officeTypes = Collections.unmodifiableMap(map);
     }
@@ -83,7 +103,7 @@ public class FileUtils {
         Files.delete(path);
     }
 
-    public static String generateId() {
+    public static String uuid() {
         // 使用 uuid 来生成临时文件的 id
         // 之前的方式会导致以下问题：
         // 重启后，文件都被重置了，会导致 Web Office 内出现错误
