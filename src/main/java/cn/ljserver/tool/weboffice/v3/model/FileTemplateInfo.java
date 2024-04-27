@@ -12,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class FileTemplate {
+public class FileTemplateInfo {
 
     @NonNull
     @JsonProperty("url")

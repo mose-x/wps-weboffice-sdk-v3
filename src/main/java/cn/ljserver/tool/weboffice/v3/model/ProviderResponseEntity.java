@@ -1,5 +1,6 @@
 package cn.ljserver.tool.weboffice.v3.model;
 
+import cn.ljserver.tool.weboffice.v3.exception.ConvertErrorCodes;
 import cn.ljserver.tool.weboffice.v3.exception.ErrorCodes;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -35,5 +36,13 @@ public class ProviderResponseEntity<T> {
     public static <T> ProviderResponseEntity<T> err() {
         return new ProviderResponseEntity<>(ErrorCodes.InternalError.getCode(),
                 ErrorCodes.InternalError.name(), null);
+    }
+
+    public static <T> ProviderResponseEntity<T> err(ConvertErrorCodes e) {
+        return new ProviderResponseEntity<>(e.getCode(),e.name(), null);
+    }
+
+    public static <T> ProviderResponseEntity<T> err(ErrorCodes e) {
+        return new ProviderResponseEntity<>(e.getCode(),e.name(), null);
     }
 }

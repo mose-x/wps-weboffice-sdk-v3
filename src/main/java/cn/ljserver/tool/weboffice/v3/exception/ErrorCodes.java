@@ -10,8 +10,8 @@ import lombok.Getter;
 @Getter
 public enum ErrorCodes {
 
+    Unknown(-1, "未知错误"),
     FileTypeNotSupport(40001, "文档类型不支持"),
-
     InvalidToken(40002, "用户凭证，即 x-weboffice-token 头, 无效"),
     PermissionDenied(40003, "用户操作权限不足"),
     FileNotExist(40004, "文档不存在"),
@@ -23,7 +23,6 @@ public enum ErrorCodes {
     UserNotExist(40010, "用户不存在"),
     FileUploadNotComplete(41001, "文件未正确上传，例如保存文档时"),
     InternalError(50001, "系统错误导致的请求不能正常响应"),
-
     NotImplementException(44004, "接口未实现"),
     ConfigNotExist(44005, "配置信息不存在");
 

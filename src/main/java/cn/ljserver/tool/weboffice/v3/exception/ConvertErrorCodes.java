@@ -1,6 +1,7 @@
 package cn.ljserver.tool.weboffice.v3.exception;
 
 import lombok.Getter;
+
 /**
  * 文档转换错误码说明
  * <p>
@@ -9,6 +10,7 @@ import lombok.Getter;
 @Getter
 public enum ConvertErrorCodes {
 
+    Unknown(-1, "未知错误"),
     InvalidArgument(10001, "参数无效"),
     Timeout(10002, "超时"),
     PermissionDenied(10003, "接口无权限"),
@@ -41,6 +43,16 @@ public enum ConvertErrorCodes {
     ConvertErrorCodes(int code, String msg) {
         this.code = code;
         this.msg = msg;
+    }
+
+    // 静态方法，通过code获取枚举实例
+    public static ConvertErrorCodes getByCode(int code) {
+        for (ConvertErrorCodes c : values()) {
+            if (c.getCode() == code) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException("无效的状态码: " + code);
     }
 
 }

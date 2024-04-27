@@ -1,17 +1,17 @@
 package cn.ljserver.tool.weboffice.v3.service;
 
+import cn.ljserver.tool.weboffice.v3.exception.ConvertErrorCodes;
 import cn.ljserver.tool.weboffice.v3.exception.FileTypeNotSupport;
-import cn.ljserver.tool.weboffice.v3.model.FileTemplate;
+import cn.ljserver.tool.weboffice.v3.model.FileTemplateInfo;
+import cn.ljserver.tool.weboffice.v3.model.FileTemplateResponse;
 import cn.ljserver.tool.weboffice.v3.model.ProviderResponseEntity;
 import cn.ljserver.tool.weboffice.v3.util.ConvertUtils;
 import cn.ljserver.tool.weboffice.v3.util.FileUtils;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Map;
 
 /**
  * 文件模板服务 -> 详见： <br>
@@ -25,16 +25,16 @@ public class FileTemplateService {
      * <a href="https://solution.wps.cn/docs/developer/files/get-template.html">wps web office 文件模板</a>
      * <br>
      *
-     * @return {@link ProviderResponseEntity<FileTemplate>}
+     * @return {@link ProviderResponseEntity< FileTemplateInfo >}
      */
     @SneakyThrows
     public ProviderResponseEntity<?> getFileTemplateResponse(String officeType) {
-        String jsonStr = request(officeType);
-        if (jsonStr != null) {
-            ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.readValue(jsonStr, ProviderResponseEntity.class);
+        FileTemplateResponse response = getFileTemplate(officeType);
+        if (response != null && response.getCode() == 0) {
+            return ProviderResponseEntity.ok(response.getData());
         } else {
-            return ProviderResponseEntity.err();
+            if (response == null) return ProviderResponseEntity.err(ConvertErrorCodes.Unknown);
+            return ProviderResponseEntity.err(ConvertErrorCodes.getByCode(response.getCode()));
         }
     }
 
@@ -43,23 +43,16 @@ public class FileTemplateService {
      * <a href="https://solution.wps.cn/docs/developer/files/get-template.html">wps web office 文件模板</a>
      * <br>
      *
-     * @return {@link FileTemplate}
+     * @return {@link FileTemplateResponse}
      */
     @SneakyThrows
-    public FileTemplate getFileTemplate(String officeType) {
+    public FileTemplateResponse getFileTemplate(String officeType) {
         String jsonStr = request(officeType);
         if (jsonStr != null) {
             ObjectMapper objectMapper = new ObjectMapper();
-            Map<String, Object> jsonMap = objectMapper
-                    .readValue(jsonStr, new TypeReference<Map<String, Object>>() {
-                    });
-
-            if (jsonMap != null && jsonMap.get("data") != null) {
-                String str = objectMapper.writeValueAsString(jsonMap.get("data"));
-                return objectMapper.readValue(str, FileTemplate.class);
-            }
+            return objectMapper.readValue(jsonStr, FileTemplateResponse.class);
         }
-        return null;
+        return new FileTemplateResponse();
     }
 
     /**
