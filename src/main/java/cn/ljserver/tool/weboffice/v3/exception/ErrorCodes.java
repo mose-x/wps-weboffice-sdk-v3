@@ -15,7 +15,7 @@ public enum ErrorCodes {
     InvalidToken(40002, "用户凭证，即 x-weboffice-token 头, 无效"),
     PermissionDenied(40003, "用户操作权限不足"),
     FileNotExist(40004, "文档不存在"),
-    InvalidArgument(40005,"请求参数错误"),
+    InvalidArgument(40005, "请求参数错误"),
     StorageNoSpace(40006, "存储空间已满"),
     CustomError(40007, "自定义错误，可以用来返回自定义错误信息"),
     FileNameConflict(40008, "文档名称冲突，例如重命名文档时"),
@@ -24,7 +24,8 @@ public enum ErrorCodes {
     FileUploadNotComplete(41001, "文件未正确上传，例如保存文档时"),
     InternalError(50001, "系统错误导致的请求不能正常响应"),
 
-    NotImplementException(44004, "接口未实现");
+    NotImplementException(44004, "接口未实现"),
+    ConfigNotExist(44005, "配置信息不存在");
 
     private final int code;
     private final String msg;

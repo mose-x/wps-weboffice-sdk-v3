@@ -5,11 +5,9 @@ import lombok.SneakyThrows;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
- * @ClassName: FileUtils
- * @Description: 文件工具类
+ * 文件工具类
  */
 public class FileUtils {
     private FileUtils() {
@@ -28,7 +26,9 @@ public class FileUtils {
     // 智能文档
     public static final String D = "d";
 
-    public static final String[] convertArrTypes = {S, W, P, D, O};
+    public static final String[] templateTypes = {S, W, P, D, O};
+
+    public static final String[] convertToDocumentTypes = {"docx", "xlsx", "pptx"};
 
     public static final Map<String, String> officeTypes;
 

@@ -13,8 +13,7 @@ import lombok.NonNull;
 import java.time.LocalDateTime;
 
 /**
- * @ClassName: FileInfo
- * @Description: 文件信息
+ * 文件信息
  */
 @Data
 @Builder

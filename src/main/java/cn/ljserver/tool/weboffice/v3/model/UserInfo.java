@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 /**
- * @ClassName: UserInfo
- * @Description: 用户信息
+ * 用户信息
  */
 @Data
 @Builder

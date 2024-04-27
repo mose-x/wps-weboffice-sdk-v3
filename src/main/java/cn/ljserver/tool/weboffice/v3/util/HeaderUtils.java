@@ -9,8 +9,7 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * @ClassName: HeaderUtils
- * @Description: 请求头工具类
+ * 请求头工具类
  */
 public class HeaderUtils {
     private HeaderUtils() {

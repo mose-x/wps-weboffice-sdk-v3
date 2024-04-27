@@ -8,17 +8,16 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 /**
- * @ClassName RequestUtils
- * @Description: 请求工具类
+ * 请求工具类
  */
 public class RequestUtils {
     private RequestUtils() {
@@ -33,33 +32,55 @@ public class RequestUtils {
 
     @SuppressWarnings("CallToPrintStackTrace")
     @SneakyThrows
-    public static String get(String uri, Map<String, String> headers) {
-        URL url = new URL(uri);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        // 设置请求方法为 GET
-        connection.setRequestMethod("GET");
+    public static String request(String method, String url, Map<String, String> headers, String jsonStringBody) {
+        // 转换请求方法为大写
+        method = method.toUpperCase();
+        // 创建url对象
+        URL thisUrl = new URL(url);
+        // 打开连接
+        HttpURLConnection connection = (HttpURLConnection) thisUrl.openConnection();
+        // 设置请求方法
+        connection.setRequestMethod(method);
+        // 设置请求头
         headers.forEach(connection::setRequestProperty);
+        // 设置输出
         connection.setDoOutput(true);
-        try (
+        try {
+            // 获取响应
+            InputStream in = connection.getInputStream();
+            InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
+            BufferedReader br = new BufferedReader(isr);
 
-                InputStream in = connection.getInputStream();
-                InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
-                BufferedReader br = new BufferedReader(isr);
-        )
-        {
+            // 处理post请求的body
+            if (jsonStringBody != null && !jsonStringBody.isEmpty()) {
+                OutputStream os = connection.getOutputStream();
+                byte[] outputInBytes = jsonStringBody.getBytes(StandardCharsets.UTF_8);
+                os.write(outputInBytes);
+                os.close();
+            }
+
+            // 处理响应...
             StringBuilder response = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
                 response.append(line);
             }
+
+            // 关闭资源
+            in.close();
+            isr.close();
+            br.close();
+
+            // 关闭连接
             connection.disconnect();
+
+            // 返回响应结果
             return response.toString();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
     }
-
 
 
 }

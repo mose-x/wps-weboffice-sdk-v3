@@ -1,17 +1,13 @@
 package cn.ljserver.tool.weboffice.v3.service;
 
-import cn.ljserver.tool.weboffice.v3.config.WebOfficeProperties;
 import cn.ljserver.tool.weboffice.v3.exception.FileTypeNotSupport;
 import cn.ljserver.tool.weboffice.v3.model.FileTemplate;
 import cn.ljserver.tool.weboffice.v3.model.ProviderResponseEntity;
+import cn.ljserver.tool.weboffice.v3.util.ConvertUtils;
 import cn.ljserver.tool.weboffice.v3.util.FileUtils;
-import cn.ljserver.tool.weboffice.v3.util.HeaderUtils;
-import cn.ljserver.tool.weboffice.v3.util.RequestUtils;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -23,9 +19,6 @@ import java.util.Map;
  */
 @Service
 public class FileTemplateService {
-
-    @Autowired
-    private WebOfficeProperties webOfficeProperties;
 
     /**
      * 文件模板服务 -> 详见： <br>
@@ -69,17 +62,18 @@ public class FileTemplateService {
         return null;
     }
 
+    /**
+     * 具体请求实现
+     */
     private String request(String officeType) {
-        boolean noneMatch = Arrays.stream(FileUtils.convertArrTypes).noneMatch(type -> type.equalsIgnoreCase(officeType));
+        boolean noneMatch = Arrays.stream(FileUtils.templateTypes)
+                .noneMatch(type -> type.equalsIgnoreCase(officeType));
         if (noneMatch) {
             throw new FileTypeNotSupport();
         }
-        String uri = "/api/developer/v1/files/" + officeType + "/template";
-        String url = webOfficeProperties.getConvert().getDomain() + uri;
-        String appid = webOfficeProperties.getConvert().getAppid();
-        String secret = webOfficeProperties.getConvert().getSecret();
-        Map<String, String> header = HeaderUtils.header("GET", uri, null, appid, secret);
-        return RequestUtils.get(url, header);
+        // 转换为小写，防止报错， 其实官方是 大小写 敏感的
+        String uri = "/api/developer/v1/files/" + officeType.toLowerCase() + "/template";
+        return ConvertUtils.get(uri);
     }
 
 }

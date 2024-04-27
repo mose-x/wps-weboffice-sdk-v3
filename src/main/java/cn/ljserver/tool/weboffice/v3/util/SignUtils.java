@@ -6,8 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * @ClassName SignUtils
- * @Description 签名工具
+ * 签名工具
  */
 public class SignUtils {
 

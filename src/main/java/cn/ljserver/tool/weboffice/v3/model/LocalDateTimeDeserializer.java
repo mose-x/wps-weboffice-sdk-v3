@@ -11,8 +11,7 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 
 /**
- * @ClassName: LocalDateTimeDeserializer
- * @Description: 时间反序列化
+ * 时间反序列化
  */
 class LocalDateTimeDeserializer extends StdDeserializer<LocalDateTime> {
     private static final ZoneOffset OFFSET = ZoneId.systemDefault().getRules().getOffset(Instant.EPOCH);

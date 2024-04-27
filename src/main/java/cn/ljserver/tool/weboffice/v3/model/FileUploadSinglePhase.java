@@ -5,9 +5,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- * @ClassName FileUploadSinglePhase
- * @Description 单阶段文件上传
- * @Version V1.0
+ * 单阶段文件上传
  **/
 public class FileUploadSinglePhase {
     @Data

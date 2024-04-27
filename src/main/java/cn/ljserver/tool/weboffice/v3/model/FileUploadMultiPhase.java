@@ -11,9 +11,7 @@ import lombok.NoArgsConstructor;
 import java.util.Map;
 
 /**
- * @ClassName FileUploadMultiPhase
- * @Description 多阶段文件上传
- * @Version 1.0
+ * 多阶段文件上传
  **/
 public class FileUploadMultiPhase {
     public static class FileUploadAddress {

@@ -16,8 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @ClassName ProviderBaseController
- * @Description: 基础控制器，异常处理
+ * 基础控制器，异常处理
  */
 @Controller
 public class ProviderBaseController {
@@ -26,7 +25,7 @@ public class ProviderBaseController {
                                                                             HttpServletResponse response) {
         // let it broken
         ResponseStatus status = AnnotationUtils.findAnnotation(exception.getClass(), ResponseStatus.class);
-        response.setStatus(status.value().value());
+        response.setStatus(status == null ? HttpStatus.INTERNAL_SERVER_ERROR.value() : status.value().value());
         return ProviderResponseEntity.builder().code(exception.getCode()).message(exception.getMessage()).build();
     }
 

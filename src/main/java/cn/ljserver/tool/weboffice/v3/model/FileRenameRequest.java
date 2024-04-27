@@ -5,8 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @ClassName: FileRenameRequest
- * @Description: 文件重命名请求
+ * 文件重命名请求
  */
 @Data
 @NoArgsConstructor

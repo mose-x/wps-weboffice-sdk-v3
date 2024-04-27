@@ -13,12 +13,12 @@ import java.util.logging.Logger;
  */
 @Configuration
 @ComponentScan("cn.ljserver.tool.weboffice.v3")
-public class AutoConfig {
+public class WebOfficeAutoConfig {
 
     private final WebOfficeProperties webOfficeProperties;
 
     @Autowired
-    public AutoConfig(WebOfficeProperties webOfficeProperties) {
+    public WebOfficeAutoConfig(WebOfficeProperties webOfficeProperties) {
         this.webOfficeProperties = webOfficeProperties;
     }
 
