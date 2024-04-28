@@ -1,4 +1,4 @@
-package cn.ljserver.tool.weboffice.v3.model;
+package cn.ljserver.tool.weboffice.v3.model.convert;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,7 +17,7 @@ public class ImgToDocRequest {
     @NonNull
     @JsonProperty("img_urls")
     @Description("图片url集合")
-    private String[] img_urls;
+    private String[] imgUrls;
 
     @JsonProperty("text_unify")
     @Description("统一段落字体字号，建议传true")

@@ -1,5 +1,6 @@
 package cn.ljserver.tool.weboffice.v3.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestAttributes;
@@ -30,27 +31,31 @@ public class RequestUtils {
         return ((ServletRequestAttributes) attrs).getRequest();
     }
 
-    @SuppressWarnings("CallToPrintStackTrace")
     @SneakyThrows
-    public static String request(String method, String url, Map<String, String> headers, String jsonStringBody) {
-        // 转换请求方法为大写
-        method = method.toUpperCase();
-        // 创建url对象
-        URL thisUrl = new URL(url);
-        // 打开连接
-        HttpURLConnection connection = (HttpURLConnection) thisUrl.openConnection();
-        // 设置请求方法
-        connection.setRequestMethod(method);
-        // 设置请求头
-        headers.forEach(connection::setRequestProperty);
-        // 设置输出
-        connection.setDoOutput(true);
-        try {
-            // 获取响应
-            InputStream in = connection.getInputStream();
-            InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
-            BufferedReader br = new BufferedReader(isr);
+    public static <T> String request(String method, String url, Map<String, String> headers, T body) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonStringBody = body == null ? "" : objectMapper.writeValueAsString(body);
+        return request(method, url, headers, jsonStringBody);
+    }
 
+    @SuppressWarnings("CallToPrintStackTrace")
+    public static String request(String method, String url, Map<String, String> headers, String jsonStringBody) {
+        try {
+            // 转换请求方法为大写
+            method = method.toUpperCase();
+            // 创建url对象
+            URL thisUrl = new URL(url);
+            // 打开连接
+            HttpURLConnection connection = (HttpURLConnection) thisUrl.openConnection();
+            // 设置请求方法
+            connection.setRequestMethod(method);
+            // 设置请求头
+            headers.forEach(connection::setRequestProperty);
+            // 设置输出
+            connection.setDoOutput(true);
+
+            // 这里的顺序不能错
+            // ****************************************************
             // 处理post请求的body
             if (jsonStringBody != null && !jsonStringBody.isEmpty()) {
                 OutputStream os = connection.getOutputStream();
@@ -58,6 +63,12 @@ public class RequestUtils {
                 os.write(outputInBytes);
                 os.close();
             }
+
+            // 获取响应
+            InputStream in = connection.getInputStream();
+            InputStreamReader isr = new InputStreamReader(in, StandardCharsets.UTF_8);
+            BufferedReader br = new BufferedReader(isr);
+            // ****************************************************
 
             // 处理响应...
             StringBuilder response = new StringBuilder();

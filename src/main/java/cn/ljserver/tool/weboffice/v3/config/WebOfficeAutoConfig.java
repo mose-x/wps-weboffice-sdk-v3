@@ -34,9 +34,6 @@ public class WebOfficeAutoConfig {
             if (webOfficeProperties.getConvert().getSecret() == null || webOfficeProperties.getConvert().getSecret().isEmpty()) {
                 log.log(Level.WARNING, "web-office-v3: WARNING: Required application property 'web-office.convert.secret' is null or empty.");
             }
-            if (webOfficeProperties.getConvert().getDomain() == null || webOfficeProperties.getConvert().getDomain().isEmpty()) {
-                log.log(Level.WARNING, "web-office-v3: WARNING: Required application property 'web-office.convert.domain' is null or empty.");
-            }
         }
 
         if (webOfficeProperties.getPreview() == null) {

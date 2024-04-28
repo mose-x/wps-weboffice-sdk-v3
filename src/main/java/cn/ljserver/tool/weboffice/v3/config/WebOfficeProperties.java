@@ -61,7 +61,7 @@ public class WebOfficeProperties {
 
 
     public static class ConvertConfig extends Config {
-        private String domain;
+        private String domain = "https://solution.wps.cn";
 
         public String getDomain() {
             return domain;

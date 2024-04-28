@@ -2,6 +2,8 @@ package cn.ljserver.tool.weboffice.v3.util;
 
 import cn.ljserver.tool.weboffice.v3.config.WebOfficeProperties;
 import cn.ljserver.tool.weboffice.v3.exception.ConfigNotExist;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,9 @@ import java.util.logging.Logger;
 @Component
 public class ConvertUtils {
 
+    private ConvertUtils() {
+    }
+
     private static WebOfficeProperties webOfficeProperties;
 
     @Autowired
@@ -25,8 +30,12 @@ public class ConvertUtils {
 
     private static final Logger log = Logger.getLogger(ConvertUtils.class.getName());
 
-    private ConvertUtils() {
+    @SneakyThrows
+    private static <T> T convert(String str, Class<T> clazz){
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.readValue(str, clazz);
     }
+
 
     /**
      * GET请求
@@ -42,6 +51,27 @@ public class ConvertUtils {
         String secret = webOfficeProperties.getConvert().getSecret();
         Map<String, String> header = HeaderUtils.header(method, uri, null, appid, secret);
         return RequestUtils.request(method, url, header, null);
+    }
+
+    /**
+     * GET请求-转换
+     */
+    public static <T> T get(String uri, Class<T> clazz) {
+        return convert(get(uri), clazz);
+    }
+
+    /**
+     * POST请求-转换
+     */
+    public static <T> T post(String uri, String body, Class<T> clazz) {
+        return convert(post(uri, body), clazz);
+    }
+
+    /**
+     * POST请求-转换
+     */
+    public static <T, R> T post(String uri, R body, Class<T> clazz) {
+        return convert(post(uri, body), clazz);
     }
 
     /**
@@ -61,17 +91,31 @@ public class ConvertUtils {
         return RequestUtils.request(method, url, header, body);
     }
 
+    /**
+     * POST请求
+     *
+     * @param uri  请求URI
+     * @param body 请求体
+     * @return 请求结果
+     */
+    @SneakyThrows
+    public static <T> String post(String uri, T body) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonStringBody = body == null ? "" : objectMapper.writeValueAsString(body);
+        return post(uri, jsonStringBody);
+    }
+
     private static void checkProperties() {
         if (webOfficeProperties.getConvert() == null) {
-            log.log(Level.SEVERE, "web-office-v3: ERROR: Required application property 'web-office.preview' is null.");
+            log.log(Level.SEVERE, "web-office-v3: ERROR: Required application property 'web-office.convert' is null.");
             throw new ConfigNotExist();
         } else {
             if (webOfficeProperties.getConvert().getAppid() == null || webOfficeProperties.getConvert().getAppid().isEmpty()) {
-                log.log(Level.SEVERE, "web-office-v3: ERROR: Required application property 'web-office.preview.appid' is null or empty.");
+                log.log(Level.SEVERE, "web-office-v3: ERROR: Required application property 'web-office.convert.appid' is null or empty.");
                 throw new ConfigNotExist();
             }
             if (webOfficeProperties.getConvert().getSecret() == null || webOfficeProperties.getConvert().getSecret().isEmpty()) {
-                log.log(Level.SEVERE, "web-office-v3: ERROR: Required application property 'web-office.preview.secret' is null or empty.");
+                log.log(Level.SEVERE, "web-office-v3: ERROR: Required application property 'web-office.convert.secret' is null or empty.");
                 throw new ConfigNotExist();
             }
         }

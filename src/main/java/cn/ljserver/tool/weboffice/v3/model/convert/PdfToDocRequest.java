@@ -1,4 +1,4 @@
-package cn.ljserver.tool.weboffice.v3.model;
+package cn.ljserver.tool.weboffice.v3.model.convert;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -34,4 +34,8 @@ public class PdfToDocRequest {
     @JsonProperty("sheet_option")
     @Description("转换为表格时配置：sheet转换方式 0表示每页pdf(每页图片)一个sheet, 1表示所有页面（图片）转到一个sheet中， 默认为0")
     private Integer sheetOption = 0;
+
+    public PdfToDocRequest(@NonNull String url) {
+        this.url = url;
+    }
 }

@@ -90,6 +90,14 @@ public class FileUtils {
         officeTypes = Collections.unmodifiableMap(map);
     }
 
+    public static void typeMatchCheck(String[] types, String inputType){
+        boolean noneMatch = Arrays.stream(types)
+                .noneMatch(type -> type.equalsIgnoreCase(inputType));
+        if (noneMatch) {
+            throw new FileTypeNotSupport();
+        }
+    }
+
     /**
      * 获取文件类型/后缀
      *
