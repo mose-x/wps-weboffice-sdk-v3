@@ -6,6 +6,7 @@ import cn.ljserver.tool.weboffice.v3.model.convert.ImgToDocRequest;
 import cn.ljserver.tool.weboffice.v3.util.ConvertUtils;
 import cn.ljserver.tool.weboffice.v3.util.FileUtils;
 
+import java.util.Collections;
 import java.util.List;
 
 public class ImgToDoc {
@@ -24,5 +25,10 @@ public class ImgToDoc {
     public static ConvertResponse convert(String officeType, List<String> url) {
         if (url == null || url.isEmpty()) throw new InvalidArgument();
         return convert(officeType, new ImgToDocRequest(url));
+    }
+
+    public static ConvertResponse convert(String officeType, String url) {
+        if (url == null || url.isEmpty()) throw new InvalidArgument();
+        return convert(officeType, new ImgToDocRequest(Collections.singletonList(url)));
     }
 }
