@@ -24,6 +24,11 @@ public class RequestUtils {
     private RequestUtils() {
     }
 
+    /**
+     * 获取当前请求的HttpServletRequest
+     *
+     * @return 当前请求 {@link HttpServletRequest}
+     */
     public static HttpServletRequest getCurrentRequest() {
         // #ServletUriComponentsBuilder.getCurrentRequest()
         RequestAttributes attrs = RequestContextHolder.getRequestAttributes();
@@ -31,17 +36,36 @@ public class RequestUtils {
         return ((ServletRequestAttributes) attrs).getRequest();
     }
 
+    /**
+     * 发起请求-java原生方法
+     *
+     * @param method  请求方法
+     * @param url     请求地址
+     * @param headers 请求头
+     * @param body    请求体
+     * @param <T>     请求体类型
+     * @return 请求结果 {@link String}
+     */
     public static <T> String request(String method, String url, Map<String, String> headers, T body) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             String jsonStringBody = body == null ? "" : objectMapper.writeValueAsString(body);
             return request(method, url, headers, jsonStringBody);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * 发起请求-java原生方法
+     *
+     * @param method         请求方法
+     * @param url            请求地址
+     * @param headers        请求头
+     * @param jsonStringBody 请求body json string
+     * @return 请求结果 {@link String}
+     */
     public static String request(String method, String url, Map<String, String> headers, String jsonStringBody) {
         try {
             // 转换请求方法为大写

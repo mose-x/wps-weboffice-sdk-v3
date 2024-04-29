@@ -22,6 +22,9 @@ public class WebOfficeAutoConfig {
         this.webOfficeProperties = webOfficeProperties;
     }
 
+    /**
+     * 启动验证配置
+     */
     @PostConstruct
     public void validateProperty() {
         Logger log = Logger.getLogger(this.getClass().getName());

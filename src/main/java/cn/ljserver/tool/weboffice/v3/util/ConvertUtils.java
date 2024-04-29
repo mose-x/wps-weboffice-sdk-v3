@@ -30,11 +30,19 @@ public class ConvertUtils {
 
     private static final Logger log = Logger.getLogger(ConvertUtils.class.getName());
 
-    private static <T> T convert(String str, Class<T> clazz){
+    /**
+     * 将字符串转换为对象
+     *
+     * @param str   字符串
+     * @param clazz 对象类型
+     * @param <T>   对象类型
+     * @return 对象
+     */
+    private static <T> T convert(String str, Class<T> clazz) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.readValue(str, clazz);
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
@@ -107,12 +115,15 @@ public class ConvertUtils {
             ObjectMapper objectMapper = new ObjectMapper();
             String jsonStringBody = body == null ? "" : objectMapper.writeValueAsString(body);
             return post(uri, jsonStringBody);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * 检测配置
+     */
     private static void checkProperties() {
         if (webOfficeProperties.getConvert() == null) {
             log.log(Level.SEVERE, "web-office-v3: ERROR: Required application property 'web-office.convert' is null.");

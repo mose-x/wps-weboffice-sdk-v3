@@ -96,7 +96,13 @@ public class FileUtils {
         officeTypes = Collections.unmodifiableMap(map);
     }
 
-    public static void typeMatchCheck(String[] types, String inputType){
+    /**
+     * 匹配文件类型
+     *
+     * @param types     文件类型
+     * @param inputType 输入类型
+     */
+    public static void typeMatchCheck(String[] types, String inputType) {
         boolean noneMatch = Arrays.stream(types)
                 .noneMatch(type -> type.equalsIgnoreCase(inputType));
         if (noneMatch) {
@@ -129,7 +135,7 @@ public class FileUtils {
      * @param filePathOrUrl 文件路径或URL
      * @return 文件名称+后缀, 如a.doc，a.pdf等
      */
-    public static String name(String filePathOrUrl){
+    public static String name(String filePathOrUrl) {
         // 验证输入的路径或URL是否合法
         if (filePathOrUrl == null || filePathOrUrl.isEmpty()) {
             throw new FileTypeNotSupport();
@@ -144,11 +150,23 @@ public class FileUtils {
         return fileName;
     }
 
+    /**
+     * 判断文件是否支持
+     *
+     * @param filename 文件名
+     * @return 是否支持
+     */
     public static boolean support(String filename) {
         final String ext = suffix(filename);
         return !ext.isEmpty() && officeTypes.containsKey(ext);
     }
 
+    /**
+     * 判断文件是否支持
+     *
+     * @param path 文件路径
+     * @return 是否支持
+     */
     public static boolean support(Path path) {
         return Optional.ofNullable(path)
                 .map(Path::getFileName)
@@ -157,6 +175,12 @@ public class FileUtils {
                 .orElse(false);
     }
 
+    /**
+     * 获取文件类型
+     *
+     * @param filename 文件名
+     * @return 文件类型
+     */
     public static String officeType(String filename) {
         return Optional.of(suffix(filename))
                 .filter(s -> !s.isEmpty())
@@ -164,6 +188,12 @@ public class FileUtils {
                 .orElse("");
     }
 
+    /**
+     * 获取文件类型
+     *
+     * @param path 文件路径
+     * @return 文件类型
+     */
     public static String officeType(Path path) {
         return Optional.ofNullable(path)
                 .map(Path::getFileName)
@@ -172,21 +202,43 @@ public class FileUtils {
                 .orElse("");
     }
 
+    /**
+     * 读取文件全部内容
+     *
+     * @param path 文件路径
+     * @return 文件内容
+     */
     @SneakyThrows
     public static byte[] readAllBytes(Path path) {
         return Files.readAllBytes(path);
     }
 
+    /**
+     * 获取文件大小
+     *
+     * @param path 文件路径
+     * @return 文件大小
+     */
     @SneakyThrows
     public static long size(Path path) {
         return Files.size(path);
     }
 
+    /**
+     * 删除文件
+     *
+     * @param path 文件路径
+     */
     @SneakyThrows
     public static void delete(Path path) {
         Files.delete(path);
     }
 
+    /**
+     * 获取一个随机的 UUID
+     *
+     * @return 随机 UUID
+     */
     public static String uuid() {
         // 使用 uuid 来生成临时文件的 id
         // 之前的方式会导致以下问题：
