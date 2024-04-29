@@ -70,7 +70,7 @@ public class ImgToDoc {
     /**
      * 校验url文件格式是否合规
      */
-    private static void checkUrl(String officeType, String[] url){
+    private static void checkUrl(String officeType, String[] url) {
         if (url == null || url.length == 0) throw new InvalidArgument();
         FileUtils.typeMatchCheck(FileUtils.convertToDocumentTypes, officeType);
         for (String s : url) {

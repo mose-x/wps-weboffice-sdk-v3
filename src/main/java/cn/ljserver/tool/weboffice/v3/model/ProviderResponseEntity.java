@@ -39,10 +39,10 @@ public class ProviderResponseEntity<T> {
     }
 
     public static <T> ProviderResponseEntity<T> err(ConvertErrorCodes e) {
-        return new ProviderResponseEntity<>(e.getCode(),e.name(), null);
+        return new ProviderResponseEntity<>(e.getCode(), e.name(), null);
     }
 
     public static <T> ProviderResponseEntity<T> err(ErrorCodes e) {
-        return new ProviderResponseEntity<>(e.getCode(),e.name(), null);
+        return new ProviderResponseEntity<>(e.getCode(), e.name(), null);
     }
 }

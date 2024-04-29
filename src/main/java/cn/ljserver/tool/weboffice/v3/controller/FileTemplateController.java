@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/v3/files/template")
-public class FileTemplateController  extends ProviderBaseController{
+public class FileTemplateController extends ProviderBaseController {
 
     @GetMapping("/{officeType}")
     @ProviderJsonApi

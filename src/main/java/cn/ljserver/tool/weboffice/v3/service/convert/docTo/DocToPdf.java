@@ -64,9 +64,10 @@ public class DocToPdf {
 
     /**
      * 校验文件url是否为支持的文档类型
+     *
      * @param url 文件下载地址
      */
-    private static void checkUrl(String url){
+    private static void checkUrl(String url) {
         if (url == null || url.isEmpty()) throw new InvalidArgument();
         String fileType = FileUtils.suffix(url);
         if ("pdf".equalsIgnoreCase(fileType)) throw new InvalidArgument("url file is a pdf file now !");

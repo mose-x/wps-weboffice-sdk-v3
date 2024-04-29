@@ -47,7 +47,7 @@ public class DocToInfoResult {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class TaskInfo{
+    public static class TaskInfo {
         @JsonProperty("elapsed")
         @Description("耗时")
         private long elapsed;
@@ -62,7 +62,7 @@ public class DocToInfoResult {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class ResultInfo{
+    public static class ResultInfo {
         @JsonProperty("url")
         @Description("转换后地址")
         private String url;

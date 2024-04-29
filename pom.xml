@@ -12,7 +12,7 @@
 
 	<groupId>cn.ljserver.tool</groupId>
 	<artifactId>web-office-v3</artifactId>
-	<version>2.1.0</version>
+	<version>3.0.0</version>
 
 	<name>web-office-v3</name>
 	<description>WPS WebOffice Server</description>
@@ -122,20 +122,20 @@
 					<autoVersionSubmodules>true</autoVersionSubmodules>
 				</configuration>
 			</plugin>
-<!--			<plugin>-->
-<!--				<groupId>org.apache.maven.plugins</groupId>-->
-<!--				<artifactId>maven-gpg-plugin</artifactId>-->
-<!--				<version>1.5</version>-->
-<!--				<executions>-->
-<!--					<execution>-->
-<!--						<id>sign-artifacts</id>-->
-<!--						<phase>verify</phase>-->
-<!--						<goals>-->
-<!--							<goal>sign</goal>-->
-<!--						</goals>-->
-<!--					</execution>-->
-<!--				</executions>-->
-<!--			</plugin>-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>

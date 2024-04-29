@@ -42,7 +42,7 @@ public class PdfToDoc {
     /**
      * 校验url文件格式是否合规
      */
-    private static void checkUrl(String officeType, String url){
+    private static void checkUrl(String officeType, String url) {
         if (url == null || url.isEmpty()) throw new InvalidArgument();
         if (!"pdf".equalsIgnoreCase(FileUtils.suffix(url))) throw new InvalidArgument("url file is not a pdf file !");
         FileUtils.typeMatchCheck(FileUtils.convertToDocumentTypes, officeType);
