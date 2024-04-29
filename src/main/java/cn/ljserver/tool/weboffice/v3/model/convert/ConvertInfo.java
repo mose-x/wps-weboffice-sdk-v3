@@ -8,6 +8,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 转换结果 - 任务id  -- taskId
+ */
 @Data
 @Builder
 @NoArgsConstructor

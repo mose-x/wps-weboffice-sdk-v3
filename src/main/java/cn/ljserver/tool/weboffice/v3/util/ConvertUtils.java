@@ -3,7 +3,6 @@ package cn.ljserver.tool.weboffice.v3.util;
 import cn.ljserver.tool.weboffice.v3.config.WebOfficeProperties;
 import cn.ljserver.tool.weboffice.v3.exception.ConfigNotExist;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
@@ -15,6 +14,7 @@ import java.util.logging.Logger;
 /**
  * 转换服务请求封装工具类
  */
+@SuppressWarnings("CallToPrintStackTrace")
 @Component
 public class ConvertUtils {
 
@@ -30,10 +30,14 @@ public class ConvertUtils {
 
     private static final Logger log = Logger.getLogger(ConvertUtils.class.getName());
 
-    @SneakyThrows
     private static <T> T convert(String str, Class<T> clazz){
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(str, clazz);
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.readValue(str, clazz);
+        }catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -98,11 +102,15 @@ public class ConvertUtils {
      * @param body 请求体
      * @return 请求结果
      */
-    @SneakyThrows
     public static <T> String post(String uri, T body) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String jsonStringBody = body == null ? "" : objectMapper.writeValueAsString(body);
-        return post(uri, jsonStringBody);
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String jsonStringBody = body == null ? "" : objectMapper.writeValueAsString(body);
+            return post(uri, jsonStringBody);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
     private static void checkProperties() {

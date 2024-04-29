@@ -1,7 +1,6 @@
 package cn.ljserver.tool.weboffice.v3.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.SneakyThrows;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -20,6 +19,7 @@ import java.util.Map;
 /**
  * 请求工具类
  */
+@SuppressWarnings("CallToPrintStackTrace")
 public class RequestUtils {
     private RequestUtils() {
     }
@@ -31,14 +31,17 @@ public class RequestUtils {
         return ((ServletRequestAttributes) attrs).getRequest();
     }
 
-    @SneakyThrows
     public static <T> String request(String method, String url, Map<String, String> headers, T body) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        String jsonStringBody = body == null ? "" : objectMapper.writeValueAsString(body);
-        return request(method, url, headers, jsonStringBody);
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String jsonStringBody = body == null ? "" : objectMapper.writeValueAsString(body);
+            return request(method, url, headers, jsonStringBody);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
     }
 
-    @SuppressWarnings("CallToPrintStackTrace")
     public static String request(String method, String url, Map<String, String> headers, String jsonStringBody) {
         try {
             // 转换请求方法为大写
@@ -89,8 +92,8 @@ public class RequestUtils {
             return response.toString();
         } catch (Exception e) {
             e.printStackTrace();
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
 

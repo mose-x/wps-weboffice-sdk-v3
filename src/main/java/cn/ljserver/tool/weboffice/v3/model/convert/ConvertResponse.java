@@ -7,6 +7,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 返回转换响应数据
+ * <br>
+ * code : 状态码
+ * <br>
+ * data : 响应数据{@link ConvertInfo}
+ */
 @Data
 @Builder
 @NoArgsConstructor

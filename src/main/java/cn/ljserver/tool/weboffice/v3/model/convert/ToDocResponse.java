@@ -1,6 +1,5 @@
 package cn.ljserver.tool.weboffice.v3.model.convert;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,13 +7,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * img、pdf转为文档回参对象
+ * 返回img、pdf转为文档回参对象
+ * <br>
+ * code : 状态码
+ * <br>
+ * data : 响应数据
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class ToDocResponse {
 
     /**
