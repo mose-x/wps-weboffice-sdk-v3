@@ -51,6 +51,12 @@
 				<configuration>
 					<source>${java.source.version}</source>
 					<target>${java.target.version}</target>
+					<encoding>utf-8</encoding>
+					<compilerArguments>
+						<!---显示编译详细输出 <verbose/>-->
+						<!--dk包编译找不到-->
+						<bootclasspath>${java.home}/lib/rt.jar${path.separator}${java.home}/lib/jce.jar</bootclasspath>
+					</compilerArguments>
 				</configuration>
 			</plugin>
 			<plugin>
