@@ -12,8 +12,21 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class DocToImgRequest extends OfficeToInfo{
+public class DocToImgRequest {
+    @NonNull
+    @JsonProperty("url")
+    @Description("文档下载地址")
+    public String url;
+
+    @NonNull
+    @JsonProperty("filename")
+    @Description("文档名称，包含扩展名，例如： 文字文稿.docx")
+    public String filename;
+
+    @JsonProperty("password")
+    @Description("文档打开密码(如果文档有加密，该项则必填)")
+    public String password;
+
     @JsonProperty("long_pic")
     @Description("是否转换成单张长图，设置为 true 时，最多仅支持将 20 标准页面合成单张长图，超过可能会报错")
     private boolean longPic = false;

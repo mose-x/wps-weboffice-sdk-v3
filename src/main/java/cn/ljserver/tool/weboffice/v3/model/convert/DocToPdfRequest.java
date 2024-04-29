@@ -12,8 +12,20 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-public class DocToPdfRequest extends OfficeToInfo {
+public class DocToPdfRequest {
+    @NonNull
+    @JsonProperty("url")
+    @Description("文档下载地址")
+    public String url;
+
+    @NonNull
+    @JsonProperty("filename")
+    @Description("文档名称，包含扩展名，例如： 文字文稿.docx")
+    public String filename;
+
+    @JsonProperty("password")
+    @Description("文档打开密码(如果文档有加密，该项则必填)")
+    public String password;
 
     @JsonProperty("ranges")
     @Description("自定义需要转换的分页范围，例如：1,2-4,7，则表示转换文档的 1、2、4、7 页面 (与 from_page和to_page 互斥)")

@@ -1,5 +1,6 @@
 package cn.ljserver.tool.weboffice.v3.model.convert;
 
+import cn.ljserver.tool.weboffice.v3.util.FileUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.org.glassfish.gmbal.Description;
 import lombok.*;
@@ -10,8 +11,7 @@ import lombok.*;
 @Data
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
-public class OfficeToInfo {
+public class OfficeToRequest {
     @NonNull
     @JsonProperty("url")
     @Description("文档下载地址")
@@ -25,4 +25,20 @@ public class OfficeToInfo {
     @JsonProperty("password")
     @Description("文档打开密码(如果文档有加密，该项则必填)")
     public String password;
+
+    public OfficeToRequest(@NonNull String url) {
+        this.url = url;
+        this.filename = FileUtils.name(url);
+    }
+
+    public OfficeToRequest(@NonNull String url, @NonNull String filename) {
+        this.url = url;
+        this.filename = filename;
+    }
+
+    public OfficeToRequest(@NonNull String url, @NonNull String filename, String password) {
+        this.url = url;
+        this.filename = filename;
+        this.password = password;
+    }
 }
