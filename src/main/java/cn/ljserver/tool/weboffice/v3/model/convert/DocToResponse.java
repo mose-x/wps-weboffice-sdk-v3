@@ -7,17 +7,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 返回img、pdf转为文档回参对象
+ * 格式转换结果回参对象
  * <br>
  * code : 状态码
  * <br>
- * data : 响应数据{@link ToDocInfo}
+ * data : 响应数据{@link DocToInfo}
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ToDocResponse {
+public class DocToResponse {
 
     /**
      * 响应状态码
@@ -29,5 +29,5 @@ public class ToDocResponse {
      * 响应数据
      */
     @JsonProperty("data")
-    private ToDocInfo data;
+    private DocToInfo data;
 }

@@ -66,6 +66,12 @@ public class FileUtils {
     public static final String[] powerPointPreviewTypes = {"ppt", "pptx", "pptm", "pptm", "ppsm", "pps", "potx", "potm", "dpt", "dps", "pot", "ppsx"};
     public static final String[] pdfPreviewTypes = {"pdf"};
 
+
+    // --------------------------img type---------------------------------
+    public static final String JPG = "jpg";
+    public static final String PNG = "png";
+    public static final String[] imgTypes = {JPG, PNG};
+
     public static final Map<String, String> officeTypes;
 
     static {
@@ -105,6 +111,25 @@ public class FileUtils {
      * @return 文件类型/后缀, 如doc，pdf等，不带 ”.“ 的后缀
      */
     public static String suffix(String filePathOrUrl) {
+        // 提取路径或URL中的文件名部分
+        String fileName = name(filePathOrUrl);
+
+        // 获取文件扩展名
+        int dotIndex = fileName.lastIndexOf('.');
+        if (dotIndex != -1 && dotIndex < fileName.length() - 1) {
+            return fileName.substring(dotIndex + 1).toLowerCase();
+        } else {
+            throw new FileTypeNotSupport();
+        }
+    }
+
+    /**
+     * 获取文件名称。包含后缀
+     *
+     * @param filePathOrUrl 文件路径或URL
+     * @return 文件名称+后缀, 如a.doc，a.pdf等
+     */
+    public static String name(String filePathOrUrl){
         // 验证输入的路径或URL是否合法
         if (filePathOrUrl == null || filePathOrUrl.isEmpty()) {
             throw new FileTypeNotSupport();
@@ -116,25 +141,11 @@ public class FileUtils {
         } else {
             fileName = filePathOrUrl.substring(filePathOrUrl.lastIndexOf('/') + 1);
         }
-
-        // 获取文件扩展名
-        int dotIndex = fileName.lastIndexOf('.');
-        if (dotIndex != -1 && dotIndex < fileName.length() - 1) {
-            return fileName.substring(dotIndex + 1).toLowerCase();
-        } else {
-            throw new FileTypeNotSupport();
-        }
-    }
-
-    public static String fileExtension(String filename) {
-        return Optional.ofNullable(filename)
-                .filter(f -> f.contains("."))
-                .map(f -> f.substring(filename.lastIndexOf(".") + 1))
-                .orElse("");
+        return fileName;
     }
 
     public static boolean support(String filename) {
-        final String ext = fileExtension(filename);
+        final String ext = suffix(filename);
         return !ext.isEmpty() && officeTypes.containsKey(ext);
     }
 
@@ -147,7 +158,7 @@ public class FileUtils {
     }
 
     public static String officeType(String filename) {
-        return Optional.of(fileExtension(filename))
+        return Optional.of(suffix(filename))
                 .filter(s -> !s.isEmpty())
                 .map(officeTypes::get)
                 .orElse("");

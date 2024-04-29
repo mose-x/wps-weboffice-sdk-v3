@@ -1,5 +1,6 @@
 package cn.ljserver.tool.weboffice.v3.service.convert.docTo;
 
+import cn.ljserver.tool.weboffice.v3.model.convert.DocToResponse;
 import cn.ljserver.tool.weboffice.v3.util.ConvertUtils;
 
 /**
@@ -9,10 +10,10 @@ import cn.ljserver.tool.weboffice.v3.util.ConvertUtils;
 public class DocToResult {
 
     /**
-     * 获取转换结果
+     * 获取转换结果{@link DocToResponse}
      */
-    public static String get(String taskId) {
+    public static DocToResponse get(String taskId) {
         String uri = "/api/developer/v1/tasks/" + taskId;
-        return ConvertUtils.get(uri);
+        return ConvertUtils.get(uri, DocToResponse.class);
     }
 }

@@ -24,8 +24,7 @@ public class ImgToDoc {
      * 返回：{@link ConvertResponse}
      */
     public static ConvertResponse convert(String officeType, ImgToDocRequest r) {
-        FileUtils.typeMatchCheck(FileUtils.convertToDocumentTypes, officeType);
-        if (r.getImgUrls() == null || r.getImgUrls().length == 0) throw new InvalidArgument();
+        checkUrl(officeType, r.getImgUrls());
         String uri = "/api/developer/v1/office/img/convert/to/" + officeType.toLowerCase();
         return ConvertUtils.post(uri, r, ConvertResponse.class);
     }
@@ -66,5 +65,16 @@ public class ImgToDoc {
     public static ConvertResponse convert(String officeType, String url) {
         if (url == null || url.isEmpty()) throw new InvalidArgument();
         return convert(officeType, new ImgToDocRequest(Collections.singletonList(url)));
+    }
+
+    /**
+     * 校验url文件格式是否合规
+     */
+    private static void checkUrl(String officeType, String[] url){
+        if (url == null || url.length == 0) throw new InvalidArgument();
+        FileUtils.typeMatchCheck(FileUtils.convertToDocumentTypes, officeType);
+        for (String s : url) {
+            FileUtils.typeMatchCheck(FileUtils.imgConvertToDocumentTypes, s);
+        }
     }
 }

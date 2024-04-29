@@ -21,8 +21,7 @@ public class PdfToDoc {
      * 返回：{@link ConvertResponse}
      */
     public static ConvertResponse convert(String officeType, PdfToDocRequest r) {
-        FileUtils.typeMatchCheck(FileUtils.convertToDocumentTypes, officeType);
-        if (r == null || r.getUrl().isEmpty()) throw new InvalidArgument();
+        checkUrl(officeType, r.getUrl());
         String uri = "/api/developer/v1/office/pdf/convert/to/" + officeType.toLowerCase();
         return ConvertUtils.post(uri, r, ConvertResponse.class);
     }
@@ -38,5 +37,14 @@ public class PdfToDoc {
     public static ConvertResponse convert(String officeType, String url) {
         if (url == null || url.isEmpty()) throw new InvalidArgument();
         return convert(officeType, new PdfToDocRequest(url));
+    }
+
+    /**
+     * 校验url文件格式是否合规
+     */
+    private static void checkUrl(String officeType, String url){
+        if (url == null || url.isEmpty()) throw new InvalidArgument();
+        if (!"pdf".equalsIgnoreCase(FileUtils.suffix(url))) throw new InvalidArgument("url file is not a pdf file !");
+        FileUtils.typeMatchCheck(FileUtils.convertToDocumentTypes, officeType);
     }
 }
