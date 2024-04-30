@@ -10,6 +10,8 @@ import java.util.Objects;
 
 /**
  * 请求头工具类
+ * <br>
+ * <a href="https://solution.wps.cn/docs/web/quick-start.html#%E6%AD%A5%E9%AA%A4-3-%E5%88%9D%E5%A7%8B%E5%8C%96">前端初始化头部信息，详见官网</a>
  */
 public class HeaderUtils {
     private HeaderUtils() {
@@ -81,6 +83,8 @@ public class HeaderUtils {
      *
      * @param request 请求
      * @return X-Weboffice-Token -> 当前请求的用户凭证，即通过初始化参数传递的token值
+     * <br>
+     * <a href="https://solution.wps.cn/docs/web/quick-start.html#%E6%AD%A5%E9%AA%A4-3-%E5%88%9D%E5%A7%8B%E5%8C%96">前端初始化，详见官网</a>
      */
     public static String getWebOfficeToken(HttpServletRequest request) {
         final String token;
@@ -120,6 +124,11 @@ public class HeaderUtils {
 
     /**
      * 获取请求头
+     * <p>
+     * URL 中的 query 部分，包含一些基础参数和 WebOffice SDK 初始化时通过customArgs传递的参数，例如customArgs的值为{"firstname":"jack","lastname":"green"}，
+     * 那么该请求头的内容为_w_appid=xxx&_w_tokentype=xxx&file_id=xxx&firstname=jack&lastname=green
+     * <br>
+     * <a href="https://solution.wps.cn/docs/web/quick-start.html#%E6%AD%A5%E9%AA%A4-3-%E5%88%9D%E5%A7%8B%E5%8C%96">前端初始化，详见官网</a>
      *
      * @param request 请求
      * @return X-User-Query -> 用户传递请求数据
