@@ -33,6 +33,10 @@ public class ProviderResponseEntity<T> {
         return new ProviderResponseEntity<>(0, "ok", data);
     }
 
+    public static ProviderResponseEntity<?> ok() {
+        return new ProviderResponseEntity<>(0, "ok", "");
+    }
+
     public static <T> ProviderResponseEntity<T> err() {
         return new ProviderResponseEntity<>(ErrorCodes.InternalError.getCode(),
                 ErrorCodes.InternalError.name(), null);
