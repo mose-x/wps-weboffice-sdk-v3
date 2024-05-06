@@ -383,6 +383,18 @@ public class TestController extends ProviderBaseController {
 }
 ~~~
 
+### 实际效果
+
+--- --
+[docx 在线预览/编辑](https://qnfile.ljserver.cn/weboffice/docx.html)
+-- -------------------------------------------
+[pptx 在线预览/编辑](https://qnfile.ljserver.cn/weboffice/pptx.html)
+-- -------------------------------------------
+[xlsx 在线预览/编辑](https://qnfile.ljserver.cn/weboffice/xlsx.html)
+-- -------------------------------------------
+[pdf 在线预览/编辑](https://qnfile.ljserver.cn/weboffice/pdf.html)
+--- --
+
 
 ## 更多
 
