@@ -96,14 +96,16 @@ public class FileStorageController extends ProviderBaseController {
 
     private MultiPhaseFileStorageService getMultiPhaseServiceOrThrow() {
         if (Objects.isNull(this.multiPhase)) {
-            throw new NotImplementException(String.format("request path %s not implement", getRequestPath()));
+            String msg = String.format("request path %s not implement with interface class %s ", getRequestPath(), "MultiPhaseFileStorageService");
+            throw new NotImplementException(msg);
         }
         return this.multiPhase;
     }
 
     private SinglePhaseFileStorageService getSinglePhaseServiceOrThrow() {
         if (Objects.isNull(this.singlePhase)) {
-            throw new NotImplementException(String.format("request path %s not implement", getRequestPath()));
+            String msg = String.format("request path %s not implement with interface class %s ", getRequestPath(), "SinglePhaseFileStorageService");
+            throw new NotImplementException(msg);
         }
         return this.singlePhase;
     }

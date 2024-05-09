@@ -30,7 +30,7 @@ public class UserController extends ProviderBaseController {
     @GetMapping
     @ProviderJsonApi
     public ProviderResponseEntity<List<UserInfo>> fetchUsers(@RequestParam("user_ids") List<String> userIds) {
-        return ProviderResponseEntity.ok(this.getUserServiceOrThrow().fetchUsers(userIds));
+        return ProviderResponseEntity.ok(this.getServiceOrThrow().fetchUsers(userIds));
     }
 
     private UserService userService;
@@ -40,9 +40,10 @@ public class UserController extends ProviderBaseController {
         this.userService = userService;
     }
 
-    private UserService getUserServiceOrThrow() {
+    private UserService getServiceOrThrow() {
         if (Objects.isNull(this.userService)) {
-            throw new NotImplementException(String.format("request path %s not implement", getRequestPath()));
+            String msg = String.format("request path %s not implement with interface class %s ", getRequestPath(), "UserService");
+            throw new NotImplementException(msg);
         }
         return this.userService;
     }

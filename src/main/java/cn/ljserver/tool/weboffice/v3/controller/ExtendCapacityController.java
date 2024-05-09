@@ -104,7 +104,8 @@ public class ExtendCapacityController extends ProviderBaseController {
 
     private ExtendCapacityService getServiceOrThrow() {
         if (Objects.isNull(this.service)) {
-            throw new NotImplementException(getRequestPath());
+            String msg = String.format("request path %s not implement with interface class %s ", getRequestPath(), "ExtendCapacityService");
+            throw new NotImplementException(msg);
         }
         return this.service;
     }

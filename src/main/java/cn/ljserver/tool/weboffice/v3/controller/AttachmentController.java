@@ -1,5 +1,6 @@
 package cn.ljserver.tool.weboffice.v3.controller;
 
+import cn.ljserver.tool.weboffice.v3.exception.NotImplementException;
 import cn.ljserver.tool.weboffice.v3.model.ProviderResponseEntity;
 import cn.ljserver.tool.weboffice.v3.service.ExtendCapacityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 附件对象相关接口 -> 详见： <br>
@@ -22,7 +24,7 @@ public class AttachmentController extends ProviderBaseController {
     public ProviderResponseEntity<?> uploadAttachment(@PathVariable String key,
                                                       @RequestParam String name,
                                                       @RequestBody MultipartFile files) {
-        this.service.uploadAttachment(key, name, files);
+        this.getServiceOrThrow().uploadAttachment(key, name, files);
         return ProviderResponseEntity.ok("");
     }
 
@@ -34,7 +36,7 @@ public class AttachmentController extends ProviderBaseController {
                                                    @RequestParam int scale_max_fit_height,
                                                    @RequestParam int scale_long_edge) {
         Map<String, String> res = new HashMap<>();
-        String url = this.service.getAttachment(key, scale_max_fit_width, scale_max_fit_height, scale_long_edge);
+        String url = this.getServiceOrThrow().getAttachment(key, scale_max_fit_width, scale_max_fit_height, scale_long_edge);
         res.put("url", url);
         return ProviderResponseEntity.ok(res);
     }
@@ -43,7 +45,7 @@ public class AttachmentController extends ProviderBaseController {
     @PostMapping("/copy")
     @ProviderJsonApi
     public ProviderResponseEntity<?> copyAttachment(@RequestBody Map<String, String> keyDict) {
-        this.service.copyAttachment(keyDict);
+        this.getServiceOrThrow().copyAttachment(keyDict);
         return ProviderResponseEntity.ok();
     }
 
@@ -52,5 +54,13 @@ public class AttachmentController extends ProviderBaseController {
     @Autowired(required = false)
     public void setService(ExtendCapacityService service) {
         this.service = service;
+    }
+
+    private ExtendCapacityService getServiceOrThrow() {
+        if (Objects.isNull(this.service)) {
+            String msg = String.format("request path %s not implement with interface class %s ", getRequestPath(), "ExtendCapacityService");
+            throw new NotImplementException(msg);
+        }
+        return this.service;
     }
 }
