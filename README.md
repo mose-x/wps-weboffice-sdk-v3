@@ -10,7 +10,7 @@
 <dependency>
   <groupId>cn.ljserver.tool</groupId>
   <artifactId>web-office-v3</artifactId>
-  <version>3.1.0</version>
+  <version>3.1.1</version>
 </dependency>
 ~~~
 
