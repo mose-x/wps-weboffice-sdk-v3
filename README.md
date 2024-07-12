@@ -1,4 +1,4 @@
-# [WebOffice 开放平台](https://solution.wps.cn) Java SDK
+# [WPS WebOffice 开放平台](https://solution.wps.cn) Java SDK V3
 
 ## 依赖
 
