@@ -11,6 +11,7 @@ import lombok.*;
 public class Notify {
     @JsonProperty("file_id")
     private String fileId;
+    // 详见 NotifyType
     @JsonProperty("type")
     private String type;
     @JsonProperty("content")
