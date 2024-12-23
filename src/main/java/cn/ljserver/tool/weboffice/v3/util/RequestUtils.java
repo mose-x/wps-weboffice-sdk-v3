@@ -30,7 +30,6 @@ public class RequestUtils {
      * @return 当前请求 {@link HttpServletRequest}
      */
     public static HttpServletRequest getCurrentRequest() {
-        // #ServletUriComponentsBuilder.getCurrentRequest()
         RequestAttributes attrs = RequestContextHolder.getRequestAttributes();
         Assert.state(attrs instanceof ServletRequestAttributes, "No current ServletRequestAttributes");
         return ((ServletRequestAttributes) attrs).getRequest();
