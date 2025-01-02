@@ -76,7 +76,7 @@ public class PreviewServiceImpl implements PreviewService {
 
 ### 文档保存接口 (可选)
 
-##### <font color=Bisque>多阶段保存（较麻烦）</font>
+##### <font color=Bisque>多阶段保存（较麻烦,但是目前官方推荐此方法,后续单阶段保存方式不再支持）</font>
 
 如果要使用开发平台提供的文档编辑能力，需要近一步实现文档保存接口，`MultiPhaseFileStorageService` 或 `SinglePhaseFileStorageService` 这两个接口只需要实现一个即可，同时在开放平台配置您实现的是哪个接口
 
@@ -115,7 +115,7 @@ public class MultiPhaseFileStorageServiceImpl implements MultiPhaseFileStorageSe
 }
 ~~~
 
-##### <font color=Cyan>单阶段保存（简单，建议实现这个）</font>
+##### <font color=Cyan>单阶段保存（简单，建议实现这个(以前开通了此阶段保存接口),后续不再支持此阶段保存方式）</font>
 
 `SinglePhaseFileStorageService` 实现示例：
 
