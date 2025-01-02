@@ -115,8 +115,8 @@ public class HeaderUtils {
      * @return X-Request-Id -> wps web office 本次请求 ID，方便定位问题
      */
     public static String getRequestId(HttpServletRequest request) {
-        final String requestId;
-        if (Objects.isNull(requestId = request.getHeader("X-Request-Id"))) {
+        final String requestId = request.getHeader("X-Request-Id");
+        if (Objects.isNull(requestId)) {
             return "";
         }
         return requestId;
@@ -134,8 +134,8 @@ public class HeaderUtils {
      * @return X-User-Query -> 用户传递请求数据
      */
     public static String getUserQuery(HttpServletRequest request) {
-        final String userQuery;
-        if (Objects.isNull(userQuery = request.getHeader("X-User-Query"))) {
+        final String userQuery = request.getHeader("X-User-Query");
+        if (Objects.isNull(userQuery)) {
             return "";
         }
         return userQuery;
