@@ -5,6 +5,10 @@
 - JDK 8+
 - Spring Framework 4.0+
 
+## 其它
+- 如果使用的是java17 及以上版本，建议升级到4.x.x(修改javax为jakarta)
+- 如果使用的是java17 及以下版本，建议用历史3.x.x(最新3.1.2)
+
 ## 使用说明
 ~~~xml
 <dependency>

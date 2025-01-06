@@ -13,6 +13,8 @@ public class SignUtils {
     private SignUtils() {
     }
 
+    private static final String CONTENT_TYPE = "application/json";
+
 
     /**
      * 获取md5
@@ -51,7 +53,7 @@ public class SignUtils {
      */
     public static String sign(String appid, String secret, String date, String md5) {
         MessageDigest md;
-        String signStr = secret + md5 + "application/json" + date;
+        String signStr = secret + md5 + CONTENT_TYPE + date;
         try {
             md = MessageDigest.getInstance("SHA-1");
         } catch (NoSuchAlgorithmException e) {
@@ -76,7 +78,7 @@ public class SignUtils {
      */
     public static String sign(String appid, String secret, String date, String md5, String algorithm) {
         MessageDigest md;
-        String signStr = secret + md5 + "application/json" + date;
+        String signStr = secret + md5 + CONTENT_TYPE + date;
         try {
             md = MessageDigest.getInstance(algorithm);
         } catch (NoSuchAlgorithmException e) {
