@@ -1,6 +1,5 @@
 package cn.ljserver.tool.weboffice.v3.util;
 
-import javax.xml.bind.DatatypeConverter;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -30,11 +29,11 @@ public class SignUtils {
             if ("GET".equalsIgnoreCase(method)) {
                 md5.update(uri.getBytes());
                 byte[] md5Bytes = md5.digest();
-                return DatatypeConverter.printHexBinary(md5Bytes);
+                return HexUtils.toHex(md5Bytes);
             } else if ("POST".equalsIgnoreCase(method)) {
                 md5.update(body.getBytes(StandardCharsets.UTF_8));
                 byte[] md5Bytes = md5.digest();
-                return DatatypeConverter.printHexBinary(md5Bytes);
+                return HexUtils.toHex(md5Bytes);
             }
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
@@ -61,7 +60,7 @@ public class SignUtils {
         }
         md.update(signStr.getBytes());
         byte[] hashBytes = md.digest();
-        String sign = DatatypeConverter.printHexBinary(hashBytes);
+        String sign = HexUtils.toHex(hashBytes);
         return "WPS-2:" + appid + ":" + sign;
     }
 
@@ -86,7 +85,7 @@ public class SignUtils {
         }
         md.update(signStr.getBytes());
         byte[] hashBytes = md.digest();
-        String sign = DatatypeConverter.printHexBinary(hashBytes);
+        String sign = HexUtils.toHex(hashBytes);
         return "WPS-2:" + appid + ":" + sign;
     }
 }

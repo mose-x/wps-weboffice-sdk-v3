@@ -2,6 +2,7 @@ package cn.ljserver.tool.weboffice.v3.controller;
 
 import cn.ljserver.tool.weboffice.v3.exception.ProviderException;
 import cn.ljserver.tool.weboffice.v3.model.ProviderResponseEntity;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * 基础控制器，异常处理

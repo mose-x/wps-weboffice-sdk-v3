@@ -1,10 +1,10 @@
 package cn.ljserver.tool.weboffice.v3.config;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import javax.annotation.PostConstruct;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

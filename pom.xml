@@ -6,23 +6,23 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.7.18</version>
+		<version>3.3.3</version>
 		<relativePath/>
 	</parent>
 
 	<groupId>cn.ljserver.tool</groupId>
 	<artifactId>web-office-v3</artifactId>
-	<version>3.1.2</version>
+	<version>4.0.0</version>
 
 	<name>web-office-v3</name>
 	<description>WPS WebOffice Server</description>
 	<url>https://github.com/mose-x/wps-weboffice-sdk-v3</url>
 
 	<properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<java.source.version>1.8</java.source.version>
-		<java.target.version>1.8</java.target.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		<java.source.version>17</java.source.version>
+		<java.target.version>17</java.target.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>

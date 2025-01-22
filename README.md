@@ -2,19 +2,28 @@
 
 ## 依赖
 
-- JDK 8+
+- JDK 8 or 17+
 - Spring Framework 4.0+
 
 ## 其它
-- 如果使用的是java17 及以上版本，建议升级到4.x.x(修改javax为jakarta)
-- 如果使用的是java17 及以下版本，建议用历史3.x.x(最新3.1.2)
+- 如果使用的是java17 及以上版本，建议升级到4.x.x(修改javax为jakarta)(最新4.0.0)
+- 如果使用的是java11 及以下版本，建议用历史3.x.x(最新3.1.2)
 
 ## 使用说明
+### jdk11-
 ~~~xml
 <dependency>
   <groupId>cn.ljserver.tool</groupId>
   <artifactId>web-office-v3</artifactId>
   <version>3.1.2</version>
+</dependency>
+~~~
+### jdk17+
+~~~xml
+<dependency>
+  <groupId>cn.ljserver.tool</groupId>
+  <artifactId>web-office-v3</artifactId>
+  <version>4.0.0</version>
 </dependency>
 ~~~
 

@@ -1,12 +1,12 @@
 package cn.ljserver.tool.weboffice.v3.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
