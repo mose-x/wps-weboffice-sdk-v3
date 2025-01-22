@@ -2,7 +2,7 @@ package cn.ljserver.tool.weboffice.v3.model.convert;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sun.org.glassfish.gmbal.Description;
+import jdk.jfr.Description;
 import lombok.*;
 
 import java.util.List;
